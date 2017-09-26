@@ -4,10 +4,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if __WIN32__
-#define stat64 _stat64
-#endif
-
 /**
  * Reads every character in a file backwards into **buffer
  * @param  filename pointer to the name of the file
