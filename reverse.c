@@ -1,3 +1,10 @@
+/*****************************************************************
+Program that will reverse a text file character for character
+
+@author Kevin Anderson
+@version Fall 2017
+*****************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "file_utils.h"
@@ -15,17 +22,17 @@ int main (int argc, char** argv[] )
         char* buffer;
 
         //get the length of the file and read it into array
-        int length = read_file(inputFileName, &buffer);
+        int readLength = read_file(inputFileName, &buffer);
 
         //check if memory alloc worked
-        if(length == -1) {
+        if(readLength == -1) {
             fprintf( stderr, "File could not be read. Exiting..." );
             exit(0);
         }
-     
-        length = write_file(outputFileName, buffer, length);
+        
+        int writeLength = write_file(outputFileName, buffer, readLength);
 
-        if(length == -1) {
+        if(writeLength == -1 || writeLength != readLength) {
             fprintf( stderr, "File could not be written to. Exiting..." );
         }
 

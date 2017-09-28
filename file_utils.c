@@ -8,7 +8,7 @@
  * Reads every character in a file backwards into **buffer
  * @param  filename pointer to the name of the file
  * @param  buffer   pointer to char array
- * @return          [description]
+ * @return          length of file read
  */
 int read_file(char* filename, char **buffer ){
 
@@ -39,11 +39,7 @@ int read_file(char* filename, char **buffer ){
     } else {
     	//open file and find length
         filePointer = fopen(filename, "rb");
-        // fseek(filePointer, 0, SEEK_END);
-        // length = ftell(filePointer);
-        //fseek(filePointer, 0, SEEK_SET);
         length = fileStats.st_size;
-
 
         *buffer = (char*) malloc(length * sizeof(char));
 
@@ -65,10 +61,10 @@ int read_file(char* filename, char **buffer ){
 
 /**
  * writes each *buffer to file with the specificed filename
- * @param  filename [description]
- * @param  buffer   [description]
- * @param  size     [description]
- * @return          [description]
+ * @param  filename name of file
+ * @param  buffer   pointer to character array
+ * @param  size     length of character array
+ * @return          Length of file written
  */
 int write_file(char* filename, char *buffer, int size) {
 	FILE* filePointer;
@@ -78,6 +74,7 @@ int write_file(char* filename, char *buffer, int size) {
 		fprintf( stderr, "There was a problem opening the file for writing.\n" );
         return -1;
 	}
+
     int length = 0;
 
     for(int i = 0; i < size; i++) {
@@ -90,20 +87,5 @@ int write_file(char* filename, char *buffer, int size) {
     }
     
 	fclose(filePointer);
-    return 0;
-}
-
-/**
- * [file_exists description]
- * @param  filename [description]
- * @return          [description]
- */
-int file_exists(char* filename) {
-    FILE *fp;
-
-    if(!(fp = fopen(filename, "r"))) {
-         return 0;
-    }
-
-    return 1;
+    return length;
 }
