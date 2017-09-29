@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 
 /**
@@ -12,13 +11,13 @@
  */
 int read_file(char* filename, char **buffer ){
 
-	FILE *filePointer;
-	long length = 0;
-	long index = 0;
+    FILE *filePointer;
+    long length = 0;
+    long index = 0;
 
-    struct _stat fileStats;
+    struct stat fileStats;
     int result;
-    result = _stat( filename, &fileStats );
+    result = stat( filename, &fileStats );
     
     if(result != 0) {
         fprintf(stderr, "Problem getting information.  " );  
